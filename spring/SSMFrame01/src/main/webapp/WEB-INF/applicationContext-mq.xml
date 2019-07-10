@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://activemq.apache.org/schema/core
+        http://activemq.apache.org/schema/core/activemq-core.xsd
+        http://www.springframework.org/schema/jms
+        http://www.springframework.org/schema/jms/spring-jms.xsd">
+
+  <!-- ActiveMQ 连接工厂  -->
+  <!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS 服务厂商提供 -->
+  <amq:connectionFactory id="amqConnectionFactory" brokerURL="tcp://127.0.0.1:61616" userName="admin" password="admin"/>
+
+
+  <!-- spring提供管理的connectionFactory进行管理 -->
+  <bean id="connectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+    <!-- 托管真实的connectionFactory -->
+    <property name="targetConnectionFactory" ref="amqConnectionFactory"/>
+    <!--session的缓存数量-->
+    <property name="sessionCacheSize" value="100"/>
+  </bean>
+
+  <!--Queue类型的消息生产和消费-->
+  <!--定义生产者的template-->
+  <bean id="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
+    <constructor-arg ref="connectionFactory"/>
+    <!--非pub/sub模型（即发布/订阅模型），即队列模式-->
+    <property name="pubSubDomain" value="false"/>
+  </bean>
+
+  <bean id="queueSender" class="com.web.mq.queue.producer.QueueSender"/>
+
+  <!--定义消费者-->
+  <bean id="queueRecevier1" class="com.web.mq.queue.consumer.QueueReceiver1"/>
+  <bean id="queueReceiver2" class="com.web.mq.queue.consumer.QueueReceiver2"/>
+
+  <!--定义消费者queue监听器-->
+  <jms:listener-container destination-type="queue" container-type="default" connection-factory="connectionFactory" acknowledge="auto">
+    <jms:listener destination="test.queue" ref="queueRecevier1"/>
+    <jms:listener destination="test.queue" ref="queueReceiver2"/>
+  </jms:listener-container>
+
+  <!--topic类型的生产和消费-->
+  <bean id="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
+    <constructor-arg ref="connectionFactory"/>
+    <!--定义为pub/sub模型-->
+    <property name="pubSubDomain" value="true"/>
+  </bean>
+
+  <!--定义topic类生产者-->
+  <bean id="topicProducer" class="com.web.mq.topic.producer.TopicSender"/>
+  <!--定义topic类消费者-->
+  <bean id="topicReceiver1" class="com.web.mq.topic.consumer.TopicReceiver1"/>
+  <bean id="topicReceiver2" class="com.web.mq.topic.consumer.TopicReceiver2"/>
+
+  <!--定义topic监听容器-->
+  <jms:listener-container destination-type="topic" container-type="default" connection-factory="connectionFactory" acknowledge="auto">
+    <jms:listener destination="test.topic" ref="topicReceiver1"/>
+    <jms:listener destination="test.topic" ref="topicReceiver2"/>
+  </jms:listener-container>
+
+</beans>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+  <bean id="duridDatasource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+    <!--基本的一些属性-->
+    <property name="url" value="${mysql.druid.url}"/>
+    <property name="username" value="${mysql.druid.username}" />
+    <property name="password" value="${mysql.druid.password}" />
+
+    <!--配置初始化大小 最大最小-->
+    <property name="initialSize" value="${mysql.druid.minIdle}"/>
+    <property name="maxActive" value="${mysql.druid.maxActive}"/>
+    <property name="minIdle" value="${mysql.druid.minIdle}"/>
+
+    <!-- 配置获取连接等待超时的时间 -->
+    <property name="maxWait" value="60000" />
+
+    <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+    <property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+    <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+    <property name="minEvictableIdleTimeMillis" value="300000" />
+
+    <property name="validationQuery" value="SELECT 'x'" />
+    <property name="testWhileIdle" value="true" />
+    <property name="testOnBorrow" value="false" />
+    <property name="testOnReturn" value="false" />
+
+    <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+    <property name="poolPreparedStatements" value="true" />
+    <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+
+    <!--配置监控统计拦截的filters-->
+    <property name="filters" value="mergeStat,slf4j"/>
+    <property name="connectionProperties" value="druid.stat.slowSqlMillis=5000" />
+  </bean>
+
+  <bean id="cmsSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="duridDatasource"/>
+    <property name="configLocation" value="classpath:/MyBatis.xml"/>
+    <property name="mapperLocations">
+      <list>
+        <value>classpath:mappers/dbDruid/*.xml</value>
+      </list>
+    </property>
+    <property name="typeAliasesPackage" value="com.web.model"/>
+  </bean>
+
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="com.web.mapper.dbDruid"/>
+    <property name="sqlSessionFactoryBeanName" value="cmsSqlSessionFactory"/>
+  </bean>
+
+  <!--配置Druid与Spring相关联-->
+
+  <bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
+  </bean>
+
+  <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+    <property name="proxyTargetClass" value="true" />
+    <property name="beanNames">
+      <list>
+        <value>*Controller</value>
+      </list>
+    </property>
+    <property name="interceptorNames">
+      <list>
+        <value>druid-stat-interceptor</value>
+      </list>
+    </property>
+  </bean>
+
+
+</beans>

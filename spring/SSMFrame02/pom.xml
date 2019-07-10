@@ -1,0 +1,215 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.springImprove</groupId>
+    <artifactId>web-base</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>web-base Maven Webapp</name>
+
+    <url>http://maven.apache.org</url>
+
+    <dependencies>
+        <!--Spring 及Spring mvc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+        <!--spring web支持基础的web功能 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+        <!-- Spring MVC 支持 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.7</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!-- mybatis -->
+
+
+        <!-- 日志管理 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${org.slf4j-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-version}</version>
+        </dependency>
+
+        <!-- 持久层相关 -->
+        <!-- 引入mysql驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+        <!-- 引入mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${mybatis-spring}</version>
+        </dependency>
+        <!-- 引入数据库连接池 tomcat pool -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jdbc</artifactId>
+            <version>${tomcat-jdbc}</version>
+        </dependency>
+
+
+        <!-- 添加servlet相关支持 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${servlet}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+
+        <!-- apache -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+        <!-- json -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-lgpl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-lgpl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.7.4</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+            <!--<artifactId>jackson-annotations</artifactId>-->
+            <!--<version>2.6.0</version>-->
+        <!--</dependency>-->
+    </dependencies>
+
+    <properties>
+        <validator-version>5.2.0.Final</validator-version>
+        <quartz-version>2.2.1</quartz-version>
+        <spring-version>4.2.0.RELEASE</spring-version>
+        <org.slf4j-version>1.6.6</org.slf4j-version>
+        <logback-version>1.0.6</logback-version>
+        <mybatis-version>3.3.0</mybatis-version>
+        <mybatis-spring>1.2.3</mybatis-spring>
+        <mysql-version>5.1.6</mysql-version>
+        <tomcat-jdbc>7.0.42</tomcat-jdbc>
+        <activemq-version>5.2.0</activemq-version>
+        <servlet>2.4</servlet>
+    </properties>
+
+    <!-- 选择编译文件 -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <filters>
+                    <filter>profile-dev.properties</filter>
+                </filters>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <finalName>web-base</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>6.1.6</version>
+                <configuration>
+                    <contextPath>/</contextPath>
+                    <scanIntervalSeconds>3</scanIntervalSeconds>
+                    <scanTargetPatterns>
+                        <scanTargetPattern>
+                            <directory>src/main/webapp/WEB-INF</directory>
+                            <excludes>
+                                <exclude>**/*.jsp</exclude>
+                            </excludes>
+                            <includes>
+                                <include>**/*.properties</include>
+                                <include>**/*.xml</include>
+                            </includes>
+                        </scanTargetPattern>
+                    </scanTargetPatterns>
+                    <requestLog implementation="org.mortbay.jetty.NCSARequestLog">
+                        <filename>target/yyyy_mm_dd.request.log</filename>
+                        <retainDays>90</retainDays>
+                        <append>true</append>
+                        <extended>false</extended>
+                        <logTimeZone>GMT</logTimeZone>
+                    </requestLog>
+                    <connectors>
+                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>80</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+</project>

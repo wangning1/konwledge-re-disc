@@ -1,0 +1,44 @@
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+      /WEB-INF/applicationContext*.xml
+    </param-value>
+  </context-param>
+
+
+
+
+  <!-- 配置Spring mvc -->
+  <servlet>
+    <servlet-name>spring-web</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>spring-web</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <!--未捕获的异常息进行 -->
+   <error-page>
+     <error-code>500</error-code>
+     <location>/WEB-INF/jsp/500.jsp</location>
+   </error-page>
+  <error-page>
+    <error-code>400</error-code>
+    <location>/WEB-INF/jsp/error.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/jsp/error.jsp</location>
+  </error-page>
+
+</web-app>

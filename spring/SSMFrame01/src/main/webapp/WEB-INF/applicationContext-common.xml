@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!--将配置文件读取进来进行管理 -->
+  <bean id="propertiesConfig" class="org.springframework.beans.factory.config.PropertiesFactoryBean" >
+    <property name="locations">
+      <list>
+        <value>
+          classpath:jdbc.properties
+        </value>
+      </list>
+    </property>
+    <property name="fileEncoding" value="utf-8"/>
+  </bean>
+
+  <!-- 需要占位符进行配置 -->
+  <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="order" value="1"/>
+    <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    <property name="properties" ref="propertiesConfig"/>
+  </bean>
+
+</beans>

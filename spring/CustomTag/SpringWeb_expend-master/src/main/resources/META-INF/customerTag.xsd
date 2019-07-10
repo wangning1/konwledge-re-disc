@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.aty.com/schema/customerTag" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.aty.com/schema/customerTag" elementFormDefault="unqualified">
+
+    <xsd:element name="customerTag">
+        <xsd:complexType>
+                    <xsd:attribute name="id" type="xsd:string"/>
+                    <xsd:attribute name="tagName" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

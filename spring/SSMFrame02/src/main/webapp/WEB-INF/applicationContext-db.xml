@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="tomcatPoolDataSouce" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+    <!-- connection info -->
+    <property name="driverClassName" value="${mysql.driverClassName}"/>
+    <property name="url" value="${mysql.url}"/>
+    <property name="username" value="${mysql.username}"/>
+    <property name="password" value="${mysql.password}"/>
+    <property name="maxActive" value="${mysql.maxActive}"/>
+    <property name="minIdle" value="${mysql.minIdle}"/>
+    <property name="defaultAutoCommit" value="true"/>
+    <!-- dbcppool infp-->
+  </bean>
+
+
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="tomcatPoolDataSouce"/>
+    <property name="configLocation" value="classpath:/MyBatis.xml"/>
+    <property name="mapperLocations">
+      <list>
+        <value>classpath:mappers/db1/*.xml</value>
+      </list>
+    </property>
+    <property name="typeAliasesPackage" value="com.web.model"/>
+  </bean>
+
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="com.web.mapper.db1"/>
+    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+  </bean>
+
+</beans>
