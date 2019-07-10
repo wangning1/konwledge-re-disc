@@ -25,12 +25,10 @@ public class SelectSort {
      */
     public static void selectSort01(int[] arr, int len) {
         for (int i = 0; i < len - 1; i++) {
-            int min = arr[i + 1];
             int minIndex = i + 1;
             //遍历待排序空间，找到最小的元素
             for (int j = i + 1; j < len; j++) {
-                if (arr[j] < min) {
-                    min = arr[j];
+                if (arr[j] < arr[minIndex]) {
                     minIndex = j;
                 }
             }
