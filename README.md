@@ -12,6 +12,9 @@
         * 桶排序
         * 基数排序
         * 基数排序
+    + [二分查找](https://github.com/wangning1/konwledge-re-disc/tree/master/algorithm/02-binarySearch)
+        * 简单二分查找
+        * 变形二分查找
 - 数据结构
 
 -
