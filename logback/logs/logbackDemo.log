@@ -1,0 +1,5 @@
+20190712:16:50:11.775 [main] INFO   Starting LogbackApplication on NINGWANG216580-1 with PID 18672 (D:\konwledge-re-disc\logback\target\classes started by ningwang216580 in D:\konwledge-re-disc\logback)
+20190712:16:50:11.800 [main] INFO   No active profile set, falling back to default profiles: default
+20190712:16:50:13.404 [main] INFO   Started LogbackApplication in 2.638 seconds (JVM running for 5.873)
+20190712:16:50:13.416 [main] INFO   Welcome to logback's world!
+20190712:16:50:13.418 [main] INFO   hello world
