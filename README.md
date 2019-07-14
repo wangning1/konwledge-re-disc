@@ -25,17 +25,22 @@
    - spring全家桶
        * spring
        * spring MVC
-       * spring boot
+       * [spring boot](https://github.com/wangning1/konwledge-re-disc/tree/master/spring-boot)
        * spring cloud
    - ORM
        * MyBatis
-   -RPC
+   - RPC
        * Dubbo
+   - 日志框架
+       * slf4j  
+       * [logback](https://github.com/wangning1/konwledge-re-disc/tree/master/logback)
 
 ### 中间件
 
 ### 架构
 
 ### 工具
+   - Google Guava
+   - Commons Apache
 
 
