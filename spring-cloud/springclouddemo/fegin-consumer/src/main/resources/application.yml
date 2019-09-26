@@ -1,7 +1,7 @@
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:7761/eureka/
+      defaultZone: http://eurekaServerPeer1:7761/eureka/,http://eurekaServerPeer2:7762/eureka/,http://eurekaServerPeer3:7763/eureka/
 server:
   port: 9765
 spring:

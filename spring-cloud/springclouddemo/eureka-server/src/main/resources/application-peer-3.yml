@@ -1,0 +1,13 @@
+server:
+  port: 7763
+
+eureka:
+  instance:
+    hostname: eurekaServerPeer3
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eurekaServerPeer1:7761/eureka/,http://eurekaServerPeer2:7762/eureka/
+
+

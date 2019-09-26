@@ -1,9 +1,16 @@
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:7761/eureka/
+      defaultZone: http://eurekaServerPeer1:7761/eureka/,http://eurekaServerPeer2:7762/eureka/,http://eurekaServerPeer3:7763/eureka/
 server:
   port: 9761
 spring:
   application:
     name: service-ribbon
+
+# 暴露出所有的端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
