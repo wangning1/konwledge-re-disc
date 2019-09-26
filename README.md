@@ -26,7 +26,7 @@
        * spring
        * spring MVC
        * [spring boot](https://github.com/wangning1/konwledge-re-disc/tree/master/spring-boot)
-       * spring cloud
+       * [spring cloud](https://github.com/wangning1/konwledge-re-disc/tree/master/spring-cloud/springclouddemo)
    - ORM
        * MyBatis
    - RPC
