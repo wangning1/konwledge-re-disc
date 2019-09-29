@@ -27,6 +27,15 @@
        * spring MVC
        * [spring boot](https://github.com/wangning1/konwledge-re-disc/tree/master/spring-boot)
        * [spring cloud](https://github.com/wangning1/konwledge-re-disc/tree/master/spring-cloud/springclouddemo)
+         + 服务的注册与发现中心（Eureka高可用）
+         + 服务提供者（Eureka client）
+         + 服务调用者（Eureka client）
+            + Ribbon + rest 方式
+            + Feign 方式
+         + 服务的容错保护 Hystrix + 监控面板 Hystrix Dashboard
+         + 配置中心
+         + 服务网关 Zuul
+         + 分布式链路追踪Sleuth + Zipkin
    - ORM
        * MyBatis
    - RPC

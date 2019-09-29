@@ -1,4 +1,5 @@
-## spring cloud学习 
+## spring cloud学习
+#### Spring各组件对应工程及访问
  - 服务注册与发现中心 Eureka server 
     + 对应 module [eureka-server] 
     + 集群高可用的方式启动
@@ -12,7 +13,7 @@
  - 服务提供者
     + 对应 module [service-producer] 
     + port 8765 ...
-    + 本地启动通过访问 http://localhost:8765/sayHi 可以访问接口
+    + 本地启动通过访问 http://localhost:8765/sayHi 可以访问接口   
  - 服务消费者 Ribbon + rest
     + 断路器 Hystrix 熔断处理
     + 对应 module [service-ribbon-consumer] 
@@ -33,5 +34,18 @@
     + port 6661
     + 本地启动通过访问 http://localhost:6661/api-rabbion 将请求转发给service-ribbon-consumer
     + 本地启动通过访问 http://localhost:6661/api-feign 将请求转发给feign-consumer
-    
+ - 配置中心
+ - 分布式链路跟踪sleuth和zipkin
+    + 服务提供端和服务消费端需要的配置
+        + 引入spring-cloud-starter-sleuth和spring-cloud-starter-zipkin依赖
+        + 配置  spring.zipkin.base-url: http://localhost:9411/  # 指定了 Zipkin 服务器的地址
+    + zipkin 服务端的启动 
+        + 通过docker方式：docker run -d -p 9411:9411 openzipkin/zipkin
+        + 通过jar包方式： java -jar zipkin.jarz
+    + zipkin 界面访问
+        + 访问http://localhost:9411/zipkin/ 
+        
+#### Spring各组件启动顺序 
+   + 1. 启动eureka 集群
+     2.     
     
