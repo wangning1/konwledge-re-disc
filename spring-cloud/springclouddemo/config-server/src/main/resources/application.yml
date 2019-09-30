@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/wangning1/konwledge-re-disc/  #配置git仓库的地址
+          search-paths: spring-cloud/cloud-config-git  #git仓库下的相对地址
+          username: 2631015638@qq.com
+          password: wn208075
+server:
+  port: 10000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

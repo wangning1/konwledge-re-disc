@@ -35,6 +35,15 @@
     + 本地启动通过访问 http://localhost:6661/api-rabbion 将请求转发给service-ribbon-consumer
     + 本地启动通过访问 http://localhost:6661/api-feign 将请求转发给feign-consumer
  - 配置中心
+    + 配置中心server端
+        + 对应module [config-server]
+        + 启动项目，访问http://localhost:10000/config/dev 或 http://localhost:10000/config-dev.yml
+        + 增加刷新机制
+            + 增加actuator 依赖
+            + 通过post 访问http://localhost:10000/actuator/refresh
+    + 配置中心client端
+        + 对应module [config-client]
+        + 需要创建bootstrap.yml
  - 分布式链路跟踪sleuth和zipkin
     + 服务提供端和服务消费端需要的配置
         + 引入spring-cloud-starter-sleuth和spring-cloud-starter-zipkin依赖
