@@ -1,7 +1,16 @@
 spring:
   cloud:
     config:
-      uri: http://localhost:10000 # 配置中心的具体地址，即 config-server
+#      uri: http://localhost:10000 # 配置中心的具体地址，即 config-server
       name: config # 对应 {application} 部分
       profile: dev # 对应 {profile} 部分
+      discovery:
+        enabled: true
+        service-id: config-server
 #      label: master # 对应 {label} 部分，即 Git 的分支。如果配置中心使用的是本地存储，则该参数无用
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eurekaServerPeer1:7761/eureka/,http://eurekaServerPeer2:7762/eureka/,http://eurekaServerPeer3:7763/eureka/

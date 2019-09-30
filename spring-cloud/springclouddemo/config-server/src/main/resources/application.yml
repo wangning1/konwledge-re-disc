@@ -1,16 +1,20 @@
 spring:
   application:
     name: config-server
+  profiles:
+    active: @activatedProperties@
   cloud:
     config:
       server:
         git:
           uri: https://github.com/wangning1/konwledge-re-disc/  #配置git仓库的地址
           search-paths: spring-cloud/cloud-config-git  #git仓库下的相对地址
-          username: 2631015638@qq.com
-          password: wn208075
-server:
-  port: 10000
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eurekaServerPeer1:7761/eureka/,http://eurekaServerPeer2:7762/eureka/,http://eurekaServerPeer3:7763/eureka/
+
 
 management:
   endpoints:

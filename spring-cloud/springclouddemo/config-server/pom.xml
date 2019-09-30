@@ -14,10 +14,36 @@
     <description>Demo project for Spring Boot</description>
 
 
+    <profiles>
+        <profile>
+            <id>server1</id>
+            <properties>
+                <activatedProperties>server1</activatedProperties>
+            </properties>
+            <build>
+                <finalName>${project.name}-server1</finalName>
+            </build>
+        </profile>
+        <profile>
+            <id>server2</id>
+            <properties>
+                <activatedProperties>server2</activatedProperties>
+            </properties>
+            <build>
+                <finalName>${project.name}-server2</finalName>
+            </build>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
     </dependencies>
 

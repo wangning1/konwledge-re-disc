@@ -41,9 +41,15 @@
         + 增加刷新机制
             + 增加actuator 依赖
             + 通过post 访问http://localhost:10000/actuator/refresh
+        + 调整为高可用
+            + 调整配置文件，增加application-server1.yml和application-server2.yml
+            + pom中增加eureka配置支持，服务依赖eureka集群
     + 配置中心client端
         + 对应module [config-client]
         + 需要创建bootstrap.yml
+        + 调整为调用集群
+            + bootstrap.yml文件去掉spring.cloud.config.uri配置，增加服务发现配置
+            + pom文件中增加eureka发现机制
  - 分布式链路跟踪sleuth和zipkin
     + 服务提供端和服务消费端需要的配置
         + 引入spring-cloud-starter-sleuth和spring-cloud-starter-zipkin依赖
@@ -55,6 +61,10 @@
         + 访问http://localhost:9411/zipkin/ 
         
 #### Spring各组件启动顺序 
-   + 1. 启动eureka 集群
-     2.     
+   + 1. 启动eureka 集群 peer-1、peer-2、peer-3
+     2. 启动服务提供者
+     3. 启动服务消费者 
+     4. 如果要测试Zuul网关，需要启动Zuul
+     5. 如何要手机链路日志，需要先启动zipkin服务
+     6. 配置中心需要启动config server集群，config-server1、config-server2 
     
