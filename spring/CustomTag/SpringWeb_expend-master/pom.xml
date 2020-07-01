@@ -139,7 +139,7 @@
         <logback-version>1.0.6</logback-version>
         <mybatis-version>3.3.0</mybatis-version>
         <mybatis-spring>1.2.3</mybatis-spring>
-        <mysql-version>5.1.6</mysql-version>
+        <mysql-version>8.0.16</mysql-version>
         <tomcat-jdbc>7.0.42</tomcat-jdbc>
         <activemq-version>5.2.0</activemq-version>
         <servlet>2.4</servlet>
