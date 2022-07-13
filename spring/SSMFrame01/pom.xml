@@ -217,7 +217,7 @@
         <mybatis-spring>1.2.3</mybatis-spring>
         <mysql-version>5.1.6</mysql-version>
         <tomcat-jdbc>7.0.42</tomcat-jdbc>
-        <activemq-version>5.2.0</activemq-version>
+        <activemq-version>5.6.0</activemq-version>
         <servlet>2.4</servlet>
     </properties>
 
